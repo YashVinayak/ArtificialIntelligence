@@ -1,0 +1,57 @@
+s1 = input("Enter the String 1 : ")
+s2 = input("Enter the String 2 : ")
+s3 = input("Enter the String 3 : ")
+
+s4 = s1+s2+s3
+
+mstr=""
+for i in s4:
+    if (i in mstr)==False:
+        mstr+=i
+
+print("String with unique Characters= ",mstr)
+
+l = [False for i in range(10)]
+
+print("List= ",l)
+
+dist = {}
+
+for i in mstr:
+    if (i in dist)==False:
+        dist[i] = "-1"
+
+print(dist)
+print()
+
+def getNum(st,dist):
+    fs=""
+    for i in st:
+        fs=fs+str(dist.get(i))
+
+    return fs 
+
+
+def res(mstr,dist,l,idx,s1,s2,s3):
+
+    if idx==len(mstr):
+        num1 = getNum(s1,dist)
+        num2 = getNum(s2,dist)
+        num3 = getNum(s3,dist)
+
+        if (int(num1)+int(num2))==int(num3):
+            print(dist)
+        return
+
+    ch = mstr[idx]
+    for i in range(10):
+        if l[i]==False:
+            dist[ch] = i
+            l[i] = True
+            res(mstr,dist,l,idx+1,s1,s2,s3)
+            l[i] = False
+            dist[ch] = -1
+
+        
+idx = 0
+res(mstr,dist,l,idx,s1,s2,s3)
